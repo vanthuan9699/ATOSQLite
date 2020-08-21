@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp" />
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,14 +28,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã CT : "
+
+            android:textColor="#F60707"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/ma_ct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="#040404"
+            android:textSize="25sp"
+
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginRight="5dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chứng từ : "
-            android:textColor="#040404"
-
+            android:textColor="#F30101"
             android:textSize="25sp" />
 
         <TextView
@@ -51,8 +81,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="5dp"
+
+        android:layout_marginRight="5dp"
         android:orientation="horizontal"
 
         >
@@ -61,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mã giao dịch : "
-            android:textColor="#040404"
+            android:textColor="#FA0606"
 
             android:textSize="25sp" />
 
@@ -312,10 +343,17 @@
             android:id="@+id/trangthai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textColor="#040404"
             android:textSize="25sp" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#040404"
+        android:background="#2CB5F3"
+        android:text="LƯU" />
 
 
 </LinearLayout>

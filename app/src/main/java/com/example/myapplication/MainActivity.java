@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-TextView tv_ct, tv_magd, tv_soct;
+TextView tv_mact, tv_ct, tv_magd, tv_soct;
     EditText edt_ghichu;
     final Context context = this;
     private SQLiteDatabase db;
@@ -30,7 +30,7 @@ TextView tv_ct, tv_magd, tv_soct;
         tv_ct = findViewById(R.id.ct);
         tv_magd = findViewById(R.id.gd);
         tv_soct = findViewById(R.id.soct);
-
+        tv_mact = findViewById(R.id.ma_ct);
     }
     private void initData() {
         db = openOrCreateDatabase("QuanLy.db", MODE_PRIVATE, null);
@@ -77,6 +77,7 @@ TextView tv_ct, tv_magd, tv_soct;
         String sql = "SELECT * FROM zcdmct_tudong";
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()) {
+            tv_mact.setText(cursor.getString(0));
             tv_ct.setText(cursor.getString(1));
         }
         String sql1 = "SELECT * FROM zcdmct_giaodich";
