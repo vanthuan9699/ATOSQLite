@@ -7,11 +7,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Spinner
-        android:id="@+id/sp_loaichungtu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp" />
 
 
     <TextView
@@ -40,8 +35,8 @@
             android:textColor="#F60707"
             android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/ma_ct"
+        <Spinner
+            android:id="@+id/sp_mact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -67,8 +62,8 @@
             android:textColor="#F30101"
             android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/ct"
+        <Spinner
+            android:id="@+id/sp_ct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -96,8 +91,8 @@
 
             android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/gd"
+        <Spinner
+            android:id="@+id/sp_magd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -280,22 +275,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phiếu Y/C XH : "
-
             android:textColor="#040404"
             android:textSize="25sp" />
-
         <EditText
             android:id="@+id/ycxh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textColor="#040404"
             android:textSize="25sp" />
     </LinearLayout>
@@ -304,41 +294,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phiếu Y/C TH : "
             android:textColor="#040404"
-
             android:textSize="25sp" />
-
         <EditText
             android:id="@+id/ycth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textColor="#040404"
             android:textSize="25sp" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng thái"
             android:textColor="#040404"
-
             android:textSize="25sp" />
-
         <CheckBox
             android:id="@+id/trangthai"
             android:layout_width="match_parent"

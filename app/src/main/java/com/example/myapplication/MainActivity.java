@@ -6,13 +6,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-TextView tv_mact, tv_ct, tv_magd, tv_soct;
+    TextView tv_mact, tv_ct, tv_magd, tv_soct;
     EditText edt_ghichu;
+    Spinner sp_mact, sp_ct, sp_magd;
     final Context context = this;
     private SQLiteDatabase db;
 
@@ -27,11 +32,12 @@ TextView tv_mact, tv_ct, tv_magd, tv_soct;
     }
 
     private void init() {
-        tv_ct = findViewById(R.id.ct);
-        tv_magd = findViewById(R.id.gd);
+        sp_ct = findViewById(R.id.sp_ct);
+        sp_magd = findViewById(R.id.sp_magd);
         tv_soct = findViewById(R.id.soct);
-        tv_mact = findViewById(R.id.ma_ct);
+        sp_mact = findViewById(R.id.sp_mact);
     }
+
     private void initData() {
         db = openOrCreateDatabase("QuanLy.db", MODE_PRIVATE, null);
         String sql1 = "CREATE TABLE IF NOT EXISTS zcdmct_tudong(Ma_ct char(3)" +
@@ -56,10 +62,13 @@ TextView tv_mact, tv_ct, tv_magd, tv_soct;
                 "Status char(1)," +
                 "Status_fast char(1))";
         db.execSQL(sql3);
+
     }
     private void inserRow() {
         String sql = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXA', 'Phiếu nhập kho')";
         db.execSQL(sql);
+        String sql2 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu xuất điều chuyển')";
+        db.execSQL(sql2);
         String sql1 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('TB1', 2, 'Xuất nội bộ')";
         db.execSQL(sql1);
 //        String sql1 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu xuất điều chuyển')";
@@ -67,23 +76,38 @@ TextView tv_mact, tv_ct, tv_magd, tv_soct;
 //        String sql2 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXA', 'Phiếu nhập kho')";
 //        db.execSQL(sql2);
 //        String sql3 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PND', 'Phiếu nhập kho')";
-//        db.execSQL(sql3);
+////        db.execSQL(sql3);
 //        String sql4 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu nhập điều chuyển')";
 //        db.execSQL(sql4);
 //        String sql = "DELETE FROM zcdmct_tudong";
 //        db.execSQL(sql);
     }
     private void loadData() {
-        String sql = "SELECT * FROM zcdmct_tudong";
-        Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToNext()) {
-            tv_mact.setText(cursor.getString(0));
-            tv_ct.setText(cursor.getString(1));
-        }
-        String sql1 = "SELECT * FROM zcdmct_giaodich";
-        Cursor cursor1 = db.rawQuery(sql1, null);
-        while (cursor1.moveToNext()){
-            tv_magd.setText(cursor1.getString(2));
-        }
+//        String sql = "SELECT * FROM zcdmct_tudong";
+//        Cursor cursor = db.rawQuery(sql, null);
+//        while (cursor.moveToNext()) {
+//            tv_ct.setText(cursor.getString(1));
+//        }
+//        String sql1 = "SELECT * FROM zcdmct_giaodich";
+//        Cursor cursor1 = db.rawQuery(sql1, null);
+//        while (cursor1.moveToNext()) {
+//            tv_magd.setText(cursor1.getString(2));
+//        }
+        sp_mact.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sql = "SELECT Ten_ct FROM zcdmct_tudong WHERE Ma_ct = 'PXA'";    //kieu nhu nay dung k
+                Cursor cursor = db.rawQuery(sql, null);
+                while (cursor.moveToNext()){
+                        String tenchungtu = cursor.getString(0);
+                        Log.d("AAA",tenchungtu);  //doi mk 2p
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
