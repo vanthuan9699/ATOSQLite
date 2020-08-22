@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv_mact, tv_ct, tv_magd, tv_soct;
@@ -20,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner sp_mact, sp_ct, sp_magd;
     final Context context = this;
     private SQLiteDatabase db;
+
+    List<String> listmachungtu;
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
         initData();
         inserRow();
         loadData();
+
+        listmachungtu = new ArrayList<>();
+
+
+        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, listmachungtu);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        sp_mact.setAdapter(adapter);
+//        listmachungtu.add("Phiếu nhập kho");
+//        listmachungtu.add("Phiếu xuất điều chuyển");
+//        listmachungtu.add("Thông báo nhập kho");
+        adapter.notifyDataSetChanged();
+
     }
 
     private void init() {
@@ -64,13 +83,16 @@ public class MainActivity extends AppCompatActivity {
         db.execSQL(sql3);
 
     }
+
     private void inserRow() {
-        String sql = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXA', 'Phiếu nhập kho')";
-        db.execSQL(sql);
-        String sql2 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu xuất điều chuyển')";
-        db.execSQL(sql2);
-        String sql1 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('TB1', 2, 'Xuất nội bộ')";
-        db.execSQL(sql1);
+//        String sql = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXA', 'Phiếu nhập kho')";
+//        db.execSQL(sql);
+//        String sql2 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu xuất điều chuyển')";
+//        db.execSQL(sql2);
+//        String sql3 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('TBL', 'Thông báo nhập kho')";
+//        db.execSQL(sql3);
+//        String sql1 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('TB1', 2, 'Xuất nội bộ')";
+//        db.execSQL(sql1);
 //        String sql1 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu xuất điều chuyển')";
 //        db.execSQL(sql1);
 //        String sql2 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXA', 'Phiếu nhập kho')";
@@ -82,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 //        String sql = "DELETE FROM zcdmct_tudong";
 //        db.execSQL(sql);
     }
+
     private void loadData() {
 //        String sql = "SELECT * FROM zcdmct_tudong";
 //        Cursor cursor = db.rawQuery(sql, null);
@@ -96,12 +119,25 @@ public class MainActivity extends AppCompatActivity {
         sp_mact.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sql = "SELECT Ten_ct FROM zcdmct_tudong WHERE Ma_ct = 'PXA'";    //kieu nhu nay dung k
-                Cursor cursor = db.rawQuery(sql, null);
-                while (cursor.moveToNext()){
-                        String tenchungtu = cursor.getString(0);
-                        Log.d("AAA",tenchungtu);  //doi mk 2p
+                String sql2 = "select Ma_ct from zcdmct_tudong";// k dc a
+                Cursor cursor1 = db.rawQuery(sql2, null);
+                listmachungtu.clear();
+                while (cursor1.moveToNext()) {
+                    String machungtu = cursor1.getString(0);
+                    listmachungtu.add(machungtu);
+                    Log.d("AAA", listmachungtu.get(1));
                 }
+                adapter.notifyDataSetChanged(); //k dc a
+
+
+                String sql = "SELECT * FROM zcdmct_tudong WHERE Ten_ct = '" + listmachungtu.get(position) + "' ";
+                Cursor cursor = db.rawQuery(sql, null);
+                while (cursor.moveToNext()) {
+                    String tenchungtu = cursor.getString(1);
+                    Log.d("BBB", tenchungtu);
+                   // listmachungtu.add(tenchungtu);
+                }
+
             }
 
             @Override
