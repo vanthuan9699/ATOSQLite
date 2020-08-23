@@ -20,40 +20,28 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv_mact, tv_ct, tv_magd, tv_soct;
-    EditText edt_ghichu;
+    EditText edt_ghichu, edt_soct;
     Spinner sp_mact, sp_ct, sp_magd;
     final Context context = this;
     private SQLiteDatabase db;
-
-    List<String> listmachungtu;
+    ArrayList<String> arrayList;
     ArrayAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        arrayList = new ArrayList<>();
+        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         init();
         initData();
         inserRow();
         loadData();
-
-        listmachungtu = new ArrayList<>();
-
-
-        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, listmachungtu);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        sp_mact.setAdapter(adapter);
-//        listmachungtu.add("Phiếu nhập kho");
-//        listmachungtu.add("Phiếu xuất điều chuyển");
-//        listmachungtu.add("Thông báo nhập kho");
-        adapter.notifyDataSetChanged();
-
     }
-
     private void init() {
+        edt_soct = findViewById(R.id.soct);
         sp_ct = findViewById(R.id.sp_ct);
         sp_magd = findViewById(R.id.sp_magd);
-        tv_soct = findViewById(R.id.soct);
         sp_mact = findViewById(R.id.sp_mact);
     }
 
@@ -81,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 "Status char(1)," +
                 "Status_fast char(1))";
         db.execSQL(sql3);
-
     }
-
     private void inserRow() {
 //        String sql = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXA', 'Phiếu nhập kho')";
 //        db.execSQL(sql);
@@ -91,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 //        db.execSQL(sql2);
 //        String sql3 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('TBL', 'Thông báo nhập kho')";
 //        db.execSQL(sql3);
+//                String sql4 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('TBX', 'Thông báo')";
+//        db.execSQL(sql4);
 //        String sql1 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('TB1', 2, 'Xuất nội bộ')";
 //        db.execSQL(sql1);
 //        String sql1 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PXB', 'Phiếu xuất điều chuyển')";
@@ -109,41 +97,52 @@ public class MainActivity extends AppCompatActivity {
 //        String sql = "SELECT * FROM zcdmct_tudong";
 //        Cursor cursor = db.rawQuery(sql, null);
 //        while (cursor.moveToNext()) {
-//            tv_ct.setText(cursor.getString(1));
+//            edt_soct.setText(cursor.getString(1));
 //        }
 //        String sql1 = "SELECT * FROM zcdmct_giaodich";
 //        Cursor cursor1 = db.rawQuery(sql1, null);
 //        while (cursor1.moveToNext()) {
 //            tv_magd.setText(cursor1.getString(2));
 //        }
-        sp_mact.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sql2 = "select Ma_ct from zcdmct_tudong";// k dc a
-                Cursor cursor1 = db.rawQuery(sql2, null);
-                listmachungtu.clear();
-                while (cursor1.moveToNext()) {
-                    String machungtu = cursor1.getString(0);
-                    listmachungtu.add(machungtu);
-                    Log.d("AAA", listmachungtu.get(1));
-                }
-                adapter.notifyDataSetChanged(); //k dc a
+        String sql2 = "select Ten_ct from zcdmct_tudong";
+        Cursor cursor1 = db.rawQuery(sql2, null);
+        while (cursor1.moveToNext()) {
+            String chungtu = cursor1.getString(0);
+            arrayList.add(chungtu);
+            sp_ct.setAdapter(adapter);
+        }
+        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
+//        sp_mact.setAdapter(adapter);
 
 
-                String sql = "SELECT * FROM zcdmct_tudong WHERE Ten_ct = '" + listmachungtu.get(position) + "' ";
-                Cursor cursor = db.rawQuery(sql, null);
-                while (cursor.moveToNext()) {
-                    String tenchungtu = cursor.getString(1);
-                    Log.d("BBB", tenchungtu);
-                   // listmachungtu.add(tenchungtu);
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        sp_mact.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String sql2 = "select Ten_ct from zcdmct_tudong";
+//                Cursor cursor1 = db.rawQuery(sql2, null);
+//                listmachungtu.clear();
+//                while (cursor1.moveToNext()) {
+//                    String machungtu = cursor1.getString(1);
+//                    listmachungtu.add(machungtu);
+//                    Log.d("AAA", listmachungtu.get(1));
+//                }
+//                adapter.notifyDataSetChanged();
+//
+////
+////                String sql = "SELECT * FROM zcdmct_tudong WHERE Ten_ct = '" + listmachungtu.get(position) + "' ";
+////                Cursor cursor = db.rawQuery(sql, null);
+////                while (cursor.moveToNext()) {
+////                    String tenchungtu = cursor.getString(1);
+////                    Log.d("BBB", tenchungtu);
+////                   // listmachungtu.add(tenchungtu);
+////                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
     }
 }
