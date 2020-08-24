@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         initData();
         inserRow();
         loadData();
+        Save();
     }
     private void init() {
         btn_save = findViewById(R.id.btn_save);
@@ -138,13 +139,12 @@ public class MainActivity extends AppCompatActivity {
             arrayList3.add(magd);
             sp_magd.setAdapter(adapter3);
         }
-
     }
     private void Save(){
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }
