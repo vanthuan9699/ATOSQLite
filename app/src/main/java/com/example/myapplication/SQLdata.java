@@ -6,7 +6,7 @@ public class SQLdata {
     private String MaCT;
     private String MaGD;
     private String So_CT;
-    private Date Ngay_CT;
+    private String Ngay_CT;
     private String Ma_VT;
     private String Ma_vi_tri;
     private String Ma_lo;
@@ -39,11 +39,11 @@ public class SQLdata {
         So_CT = so_CT;
     }
 
-    public Date getNgay_CT() {
+    public String getNgay_CT() {
         return Ngay_CT;
     }
 
-    public void setNgay_CT(Date ngay_CT) {
+    public void setNgay_CT(String ngay_CT) {
         Ngay_CT = ngay_CT;
     }
 

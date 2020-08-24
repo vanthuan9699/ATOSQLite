@@ -6,9 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,17 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv_mact, tv_ct, tv_magd, tv_soct;
-    EditText edt_ghichu, edt_soct;
+    EditText edt_soluong, edt_trangthai, edt_ghichu, edt_soct, edtNgay, edtMavt, edtMavitri, edtMalo, edtKhohang, edtPhieuPO, edtPhieuxh, edtPhieuth;
     Spinner sp_mact, sp_ct, sp_magd;
     Button btn_save;
     final Context context = this;
     private SQLiteDatabase db;
     ArrayList<String> arrayList, arrayList2, arrayList3;
     ArrayAdapter adapter, adapter2, adapter3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +52,26 @@ public class MainActivity extends AppCompatActivity {
         loadData();
         Save();
     }
+
     private void init() {
+
         btn_save = findViewById(R.id.btn_save);
         edt_soct = findViewById(R.id.soct);
         sp_ct = findViewById(R.id.sp_ct);
         sp_magd = findViewById(R.id.sp_magd);
         sp_mact = findViewById(R.id.sp_mact);
+        edtNgay = findViewById(R.id.ngay);
+        edtMavt = findViewById(R.id.mavattu);
+        edtMavitri = findViewById(R.id.mavitri);
+        edtMalo = findViewById(R.id.malo);
+        edtKhohang = findViewById(R.id.khohang);
+        edtPhieuPO = findViewById(R.id.phieupo);
+        edtPhieuxh = findViewById(R.id.ycxh);
+        edtPhieuth = findViewById(R.id.ycth);
+        edt_trangthai = findViewById(R.id.edt_trangthai);
+        edt_ghichu = findViewById(R.id.edt_status);
+        edt_soluong = findViewById(R.id.soluong);
+
     }
 
     private void initData() {
@@ -85,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 "Status_fast char(1))";
         db.execSQL(sql3);
     }
+
     private void inserRow() {
 //        String sql = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('TBL', 'Thông báo nhập kho')";
 //        db.execSQL(sql);
@@ -101,8 +116,10 @@ public class MainActivity extends AppCompatActivity {
 //        db.execSQL(sql6);
 //        String sql7 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('PXA', 'XB', 'Xuất bán')";
 //        db.execSQL(sql7);
-//        String sql = "DELETE FROM zcdmct_giaodich";
+//        String sql = "DELETE FROM zc_barcode_auto";
 //        db.execSQL(sql);
+
+
     }
 
     private void loadData() {
@@ -140,10 +157,66 @@ public class MainActivity extends AppCompatActivity {
             sp_magd.setAdapter(adapter3);
         }
     }
-    private void Save(){
+
+    private void Save() {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String ma_ct = sp_mact.getSelectedItem().toString();
+                String ma_gd = sp_magd.getSelectedItem().toString();
+                String so_ct = edt_soct.getText().toString();
+                String ngay = edtNgay.getText().toString();
+                String mavatu = edtMavt.getText().toString();
+                String mavitri = edtMavitri.getText().toString();
+                String malo = edtMalo.getText().toString();
+                String makho = edtKhohang.getText().toString();
+                String soluong = edt_soluong.getText().toString();
+                String po = edtPhieuPO.getText().toString();
+                String dn = edtPhieuxh.getText().toString();
+                String th = edtPhieuth.getText().toString();
+                String trangthai = edt_trangthai.getText().toString();
+                String status = edt_ghichu.getText().toString();
+                String sql = "INSERT INTO zc_barcode_auto (Ma_ct, Ma_gd, So_ct, Ngay_ct, Ma_vt, Ma_vi_tri, Ma_lo, Ma_kho, So_luong,Stt_rec_po, Stt_rec_dn, Stt_rec_th,Status, Status_fast)" +
+                        " VALUES ('" + ma_ct + "', " +
+                        "'" + ma_gd + "', " +
+                        "'" + so_ct + "', " +
+                        "'" + ngay + "', " +
+                        "'" + mavatu + "', " +
+                        "'" + mavitri + "'," +
+                        " '" + malo + "', " +
+                        "'" + makho + "'  ," +
+                        "'" + soluong + "', " +
+                        "'" + po + "', " +
+                        "'" + dn + "', " +
+                        "'" + th + "', " +
+                        "'" + trangthai + "', " +
+                        "'" + status + "')";
+                db.execSQL(sql);
+                Toast.makeText(MainActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+//                String sql = "select * from zc_barcode_auto";
+//                Cursor cursor = db.rawQuery(sql, null);
+//                while (!cursor.isAfterLast()) {
+//                    String soct = cursor.getString(0);
+//                    String ngay = cursor.getString(1);
+//                    String mavt = cursor.getString(2);
+//                    String mavtri = cursor.getString(3);
+//                    String malo = cursor.getString(4);
+//                    String khohang = cursor.getString(5);
+//                    String phieupo = cursor.getString(6);
+//                    String phieuxh = cursor.getString(7);
+//                    String phieuth = cursor.getString(8);
+//
+//                    SQLdata u = new SQLdata();
+//                    u.setSo_CT(soct);
+//                    u.setNgay_CT(ngay);
+//                    u.setMa_VT(mavt);
+//                    u.setMa_vi_tri(mavtri);
+//                    u.setMa_lo(malo);
+//                    u.setMa_kho(khohang);
+//                    u.setStt_rec_po(phieupo);
+//                    u.setStt_rec_dn(phieuxh);
+//                    u.setStt_rec_th(phieuth);
+//                }
 
             }
         });
