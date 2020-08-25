@@ -13,13 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
 public class MainActivity extends AppCompatActivity {
+
     EditText edt_soluong, edt_trangthai, edt_ghichu, edt_soct, edtNgay, edtMavt, edtMavitri, edtMalo, edtKhohang, edtPhieuPO, edtPhieuxh, edtPhieuth;
     Spinner sp_mact, sp_ct, sp_magd;
     Button btn_save;
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         arrayList = new ArrayList<>();
         adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         adapter3 = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, arrayList3);
         adapter3.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         adapter3.notifyDataSetChanged();
+
         init();
         initData();
         inserRow();
@@ -54,10 +56,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-
         btn_save = findViewById(R.id.btn_save);
         edt_soct = findViewById(R.id.soct);
-        sp_ct = findViewById(R.id.sp_ct);
         sp_magd = findViewById(R.id.sp_magd);
         sp_mact = findViewById(R.id.sp_mact);
         edtNgay = findViewById(R.id.ngay);
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         edt_trangthai = findViewById(R.id.edt_trangthai);
         edt_ghichu = findViewById(R.id.edt_status);
         edt_soluong = findViewById(R.id.soluong);
-
     }
 
     private void initData() {
@@ -118,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
 //        db.execSQL(sql7);
 //        String sql = "DELETE FROM zc_barcode_auto";
 //        db.execSQL(sql);
-
-
     }
 
     private void loadData() {
@@ -133,14 +130,6 @@ public class MainActivity extends AppCompatActivity {
 //        while (cursor1.moveToNext()) {
 //            tv_magd.setText(cursor1.getString(2));
 //        }
-        String sql = "select Ten_ct from zcdmct_tudong";
-        Cursor cursor1 = db.rawQuery(sql, null);
-        while (cursor1.moveToNext()) {
-            String chungtu = cursor1.getString(0);
-            arrayList.add(chungtu);
-            sp_ct.setAdapter(adapter);
-        }
-
         String sql1 = "select Ma_ct from zcdmct_tudong";
         Cursor cursor = db.rawQuery(sql1, null);
         while (cursor.moveToNext()) {
@@ -148,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
             arrayList2.add(machungtu);
             sp_mact.setAdapter(adapter2);
         }
-
         String sql2 = "select Ma_gd from zcdmct_giaodich";
         Cursor cursor2 = db.rawQuery(sql2, null);
         while (cursor2.moveToNext()) {
@@ -176,7 +164,10 @@ public class MainActivity extends AppCompatActivity {
                 String th = edtPhieuth.getText().toString();
                 String trangthai = edt_trangthai.getText().toString();
                 String status = edt_ghichu.getText().toString();
-                String sql = "INSERT INTO zc_barcode_auto (Ma_ct, Ma_gd, So_ct, Ngay_ct, Ma_vt, Ma_vi_tri, Ma_lo, Ma_kho, So_luong,Stt_rec_po, Stt_rec_dn, Stt_rec_th,Status, Status_fast)" +
+                String sql = "INSERT INTO zc_barcode_auto (Ma_ct, " +
+                        "Ma_gd, So_ct, Ngay_ct, Ma_vt, Ma_vi_tri, " +
+                        "Ma_lo, Ma_kho, So_luong,Stt_rec_po, " +
+                        "Stt_rec_dn, Stt_rec_th,Status, Status_fast)" +
                         " VALUES ('" + ma_ct + "', " +
                         "'" + ma_gd + "', " +
                         "'" + so_ct + "', " +
@@ -193,30 +184,19 @@ public class MainActivity extends AppCompatActivity {
                         "'" + status + "')";
                 db.execSQL(sql);
                 Toast.makeText(MainActivity.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
-//                String sql = "select * from zc_barcode_auto";
-//                Cursor cursor = db.rawQuery(sql, null);
-//                while (!cursor.isAfterLast()) {
-//                    String soct = cursor.getString(0);
-//                    String ngay = cursor.getString(1);
-//                    String mavt = cursor.getString(2);
-//                    String mavtri = cursor.getString(3);
-//                    String malo = cursor.getString(4);
-//                    String khohang = cursor.getString(5);
-//                    String phieupo = cursor.getString(6);
-//                    String phieuxh = cursor.getString(7);
-//                    String phieuth = cursor.getString(8);
-//
-//                    SQLdata u = new SQLdata();
-//                    u.setSo_CT(soct);
-//                    u.setNgay_CT(ngay);
-//                    u.setMa_VT(mavt);
-//                    u.setMa_vi_tri(mavtri);
-//                    u.setMa_lo(malo);
-//                    u.setMa_kho(khohang);
-//                    u.setStt_rec_po(phieupo);
-//                    u.setStt_rec_dn(phieuxh);
-//                    u.setStt_rec_th(phieuth);
-//                }
+                edt_soct.setText("");
+                edtNgay.setText("");
+                edtMavt.setText("");
+                edtMavitri.setText("");
+                edtMalo.setText("");
+                edtKhohang.setText("");
+                edt_soluong.setText("");
+                edtPhieuPO.setText("");
+                edtPhieuxh.setText("");
+                edtPhieuth.setText("");
+                edt_trangthai.setText("");
+                edt_ghichu.setText("");
+
 
             }
         });
