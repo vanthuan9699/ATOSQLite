@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 //        db.execSQL(sql4);
 //        String sql5 = "INSERT INTO zcdmct_tudong(Ma_ct, Ten_ct) VALUES ('PNF', 'Phiếu nhập điều chuyển')";
 //        db.execSQL(sql5);
-//
 //        String sql6 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('PXA', 2, 'Xuất nội bộ')";
 //        db.execSQL(sql6);
 //        String sql7 = "INSERT INTO zcdmct_giaodich(Ma_ct, Ma_gd, Ten_gd) VALUES ('PXA', 'XB', 'Xuất bán')";
@@ -120,16 +119,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-//        String sql = "SELECT * FROM zcdmct_tudong";
-//        Cursor cursor = db.rawQuery(sql, null);
-//        while (cursor.moveToNext()) {
-//            edt_soct.setText(cursor.getString(1));
-//        }
-//        String sql1 = "SELECT * FROM zcdmct_giaodich";
-//        Cursor cursor1 = db.rawQuery(sql1, null);
-//        while (cursor1.moveToNext()) {
-//            tv_magd.setText(cursor1.getString(2));
-//        }
         String sql1 = "select Ma_ct from zcdmct_tudong";
         Cursor cursor = db.rawQuery(sql1, null);
         while (cursor.moveToNext()) {
@@ -145,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
             sp_magd.setAdapter(adapter3);
         }
     }
-
     private void Save() {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 String status = edt_ghichu.getText().toString();
                 String sql = "INSERT INTO zc_barcode_auto (Ma_ct, " +
                         "Ma_gd, So_ct, Ngay_ct, Ma_vt, Ma_vi_tri, " +
-                        "Ma_lo, Ma_kho, So_luong,Stt_rec_po, " +
+                        "Ma_lo, Ma_kho, So_luong, Stt_rec_po, " +
                         "Stt_rec_dn, Stt_rec_th,Status, Status_fast)" +
                         " VALUES ('" + ma_ct + "', " +
                         "'" + ma_gd + "', " +
@@ -174,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         "'" + ngay + "', " +
                         "'" + mavatu + "', " +
                         "'" + mavitri + "'," +
-                        " '" + malo + "', " +
+                        "'" + malo + "', " +
                         "'" + makho + "'  ," +
                         "'" + soluong + "', " +
                         "'" + po + "', " +
@@ -196,8 +184,6 @@ public class MainActivity extends AppCompatActivity {
                 edtPhieuth.setText("");
                 edt_trangthai.setText("");
                 edt_ghichu.setText("");
-
-
             }
         });
     }
