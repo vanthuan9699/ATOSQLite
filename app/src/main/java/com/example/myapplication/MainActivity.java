@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 String th = edtPhieuth.getText().toString();
                 String trangthai = edt_trangthai.getText().toString();
                 String status = edt_ghichu.getText().toString();
+
                 String sql = "INSERT INTO zc_barcode_auto (Ma_ct, " +
                         "Ma_gd, So_ct, Ngay_ct, Ma_vt, Ma_vi_tri, " +
                         "Ma_lo, Ma_kho, So_luong, Stt_rec_po, " +
