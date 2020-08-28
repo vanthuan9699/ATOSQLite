@@ -2,7 +2,9 @@ package com.example.myapplication.models;
 
 import java.util.Date;
 
-public class SQLdata {
+public class Barcode {
+
+    private int id;
     private String MaCT;
     private String MaGD;
     private String So_CT;
@@ -17,6 +19,53 @@ public class SQLdata {
     private String Stt_rec_th;
     private String Status;
     private String Status_fast;
+
+    public Barcode(){}
+
+    public Barcode(String maCT, String maGD, String so_CT, String ngay_CT, String ma_VT, String ma_vi_tri, String ma_lo, String ma_kho, String so_luong, String stt_rec_po, String stt_rec_dn, String stt_rec_th, String status, String status_fast) {
+        MaCT = maCT;
+        MaGD = maGD;
+        So_CT = so_CT;
+        Ngay_CT = ngay_CT;
+        Ma_VT = ma_VT;
+        Ma_vi_tri = ma_vi_tri;
+        Ma_lo = ma_lo;
+        Ma_kho = ma_kho;
+        So_luong = so_luong;
+        Stt_rec_po = stt_rec_po;
+        Stt_rec_dn = stt_rec_dn;
+        Stt_rec_th = stt_rec_th;
+        Status = status;
+        Status_fast = status_fast;
+    }
+    public Barcode(int id, String maCT, String maGD, String so_CT, String ngay_CT, String ma_VT, String ma_vi_tri, String ma_lo, String ma_kho, String so_luong, String stt_rec_po, String stt_rec_dn, String stt_rec_th, String status, String status_fast) {
+        this.id = id;
+        MaCT = maCT;
+        MaGD = maGD;
+        So_CT = so_CT;
+        Ngay_CT = ngay_CT;
+        Ma_VT = ma_VT;
+        Ma_vi_tri = ma_vi_tri;
+        Ma_lo = ma_lo;
+        Ma_kho = ma_kho;
+        So_luong = so_luong;
+        Stt_rec_po = stt_rec_po;
+        Stt_rec_dn = stt_rec_dn;
+        Stt_rec_th = stt_rec_th;
+        Status = status;
+        Status_fast = status_fast;
+    }
+
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getMaCT() {
         return MaCT;
     }

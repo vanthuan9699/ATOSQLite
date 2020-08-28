@@ -11,7 +11,7 @@
     <EditText
         android:clickable="false"
         android:id="@+id/id"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="ID"/>
     <TextView

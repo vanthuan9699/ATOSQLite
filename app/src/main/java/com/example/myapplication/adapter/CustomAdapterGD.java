@@ -26,6 +26,7 @@ public class CustomAdapterGD extends ArrayAdapter<GiaoDich> {
         this.resoure = resource;
         this.giaoDichList = objects;
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

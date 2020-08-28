@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     EditText edt_soluong, edt_trangthai, edt_ghichu, edt_soct, edtNgay, edtMavt, edtMavitri, edtMalo, edtKhohang, edtPhieuPO, edtPhieuxh, edtPhieuth;
-    Spinner sp_mact, sp_ct, sp_magd;
+    Spinner sp_mact, sp_magd;
     Button btn_save;
     final Context context = this;
     private SQLiteDatabase db;
