@@ -57,6 +57,7 @@ public class BarCodeFragment extends Fragment {
         //  loadData();
         return view;
     }
+
     private Barcode createBarcode() {
         String mact = sp_mact.getSelectedItem().toString();
         String magd = sp_magd.getSelectedItem().toString();

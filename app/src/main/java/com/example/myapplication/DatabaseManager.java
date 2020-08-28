@@ -16,17 +16,16 @@ import java.util.List;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     private final String Tag = "DatabaseManager";
-    private static final String DATABASE_NAME = "Quanly.db";
+    private static final String DATABASE_NAME = "Quanly1.db";
     private static final String TABLE_NAME = "zcdmct_tudong";
     private static final String TABLE_NAME1 = "zcdmct_giaodich";
-    private static final String TABLE_NAME2 = "zc_barcode_auto";
+   // private static final String TABLE_NAME2 = "zc_barcode_auto";
+    private static final String TABLE_NAME3 = "zc_barcode_auto";
     private static final String ID = "id";
     private static final String MACT = "Ma_ct";
     private static final String TENCT = "Ten_ct";
     private static final String MAGD = "Ma_gd";
     private static final String TENGD = "Ten_gd";
-
-
     private static final String SOCT = "So_ct";
     private static final String Ngay = "Ngay_ct";
     private static final String MaVT = "Ma_vt";
@@ -42,17 +41,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     private final Context context;
 
-    private String sqlQuery = "CREATE TABLE " + TABLE_NAME + " (" +
+    private String sqlQuery = "CREATE TABLE if not exists " + TABLE_NAME + " (" +
             ID + " integer primary key," +
             MACT + " CHAR(3), " +
             TENCT + " NVARCHAR(128))";
 
-    private String sqlQuery1 = "CREATE TABLE " + TABLE_NAME1 + " (" +
+    private String sqlQuery1 = "CREATE TABLE if not exists " + TABLE_NAME1 + " (" +
             ID + " integer primary key," +
             MACT + " CHAR(3), " +
             MAGD + " CHAR(3)," +
             TENGD + " NVARCHAR(128))";
-    private String sqlQuery2 = "CREATE TABLE " + TABLE_NAME2 + " (" +
+    private String sqlQuery2 = "CREATE TABLE if not exists " + TABLE_NAME3 + " (" +
             ID + " integer primary key," +
             MACT + " CHAR(3), " +
             MAGD + " CHAR(3)," +
@@ -74,14 +73,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         this.context = context;
         Log.d(Tag, "DBManager: ");
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sqlQuery);
         db.execSQL(sqlQuery1);
         db.execSQL(sqlQuery2);
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
@@ -95,7 +92,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-
     public void addGiaoDich(GiaoDich giaoDich) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -104,8 +100,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(TENGD, giaoDich.getTenGD());
         db.insert(TABLE_NAME1, null, values);
         db.close();
-
-
     }
 
     public void addBarcode(Barcode barcode) {
@@ -125,13 +119,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(STTTH, barcode.getStt_rec_th());
         values.put(STATUS, barcode.getStatus());
         values.put(STATUS_FAST, barcode.getStatus_fast());
-        db.insert(TABLE_NAME2, null, values);
+        db.insert(TABLE_NAME3, null, values);
         db.close();
     }
 
     public List<Barcode> getAllBarcode() {
         List<Barcode> barcodeList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME2;
+        String selectQuery = "SELECT * FROM " + TABLE_NAME3;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
@@ -158,7 +152,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return barcodeList;
     }
-
     public List<TuDong> getAllTuDong() {
         List<TuDong> listTuDong = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
