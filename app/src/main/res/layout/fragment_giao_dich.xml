@@ -6,11 +6,6 @@
     android:orientation="vertical"
     tools:context=".Fragment.TuDongFragment">
 
-    <EditText
-        android:id="@+id/idgd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="false" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,15 +88,15 @@
             android:layout_marginRight="3dp"
             android:layout_marginLeft="3dp"/>
 
-        <Button
-            android:id="@+id/btn_suagd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="SỬA"
-            android:background="#38B5ED"
-            android:layout_marginRight="3dp"
-            android:layout_marginLeft="3dp"/>
+<!--        <Button-->
+<!--            android:id="@+id/btn_suagd"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="SỬA"-->
+<!--            android:background="#38B5ED"-->
+<!--            android:layout_marginRight="3dp"-->
+<!--            android:layout_marginLeft="3dp"/>-->
 
 
     </LinearLayout>
